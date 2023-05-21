@@ -8,10 +8,11 @@ interface Props {
         email: string,
         image: string
     }
+    theme:string
 }
 export default function Header(props: Props) {
     return (
-        <main className="w-ful flex  justify-between items-center h-24 bg-zinc-50 pr-10 pl-44">
+        <main className={`flex  justify-between items-center h-24 bg-${props.theme==='light'?'zinc-50':'zinc-700'} pr-10 pl-44`}>
             <div className="relative flex items-center">
                 <input  className="h-12 bg-neutral-100 rounded-md w-[360px]"/>
                 <button  className="absolute h-8 w-[36] flex items-center right-2 gap-2 px-2 rounded-md bg-white">
