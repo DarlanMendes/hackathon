@@ -7,78 +7,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
-  id_category Int     @id @default(autoincrement())
-  name        String? @db.VarChar
-  event       event[]
+// model User {
+//   id String @id @default(uuid())
+//   email String @unique 
+//   phonenumber String
+//   password String
+//   photo String
+//   role String @default("public")
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt @default(now())
+
+//   @@map("users")
+// }
+
+// model Room {
+//   id Int @id @default(autoincrement())
+//   name String
+//   capacity Int
+//   resources String[]
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt @default(now())
+//   @@map("rooms")
+// }
+
+// model Event {
+//   id           Int       @id @default(autoincrement())
+//   nome         String
+//   dataHoraInicio DateTime
+//   dataHoraFim   DateTime
+//   room         Room     @relation(fields: [roomId], references: [id])
+//   roomId       Int
+//   organizer  User   @relation(fields: [organizerId], references: [id])
+//   organizerId Int
+// }
+
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  phonenumber String   @default("")
+  photo       String
+  role        String   @default("public")
+  userEvents UserEvent[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@map("users")
 }
 
-model company {
-  id_company Int     @id @default(autoincrement())
-  nome       String? @db.VarChar
-  user       user[]
+model Room {
+  id        Int      @id @default(autoincrement())
+  name      String
+  capacity  Int
+  resources String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  eventId String
+  event     Event @relation(fields: [eventId], references: [id])
+  @@map("rooms")
 }
 
-model event {
-  id_event          Int          @id @default(autoincrement())
-  title             String?      @db.VarChar
-  event_date        DateTime?    @db.Date
-  duration          Int?
-  event_description String?      @db.VarChar
-  idroomse          Int?
-  id_categorye      Int?
-  category          category?    @relation(fields: [id_categorye], references: [id_category], onDelete: NoAction, onUpdate: NoAction)
-  room              room?        @relation(fields: [idroomse], references: [id_room], onDelete: NoAction, onUpdate: NoAction)
-  user_event        user_event[]
+model Event {
+  id                 String      @id @default(uuid())
+  nome               String      @db.VarChar()
+  dateHourStartsAt   DateTime
+  dateHourFinishesAt DateTime
+  roomId             Int
+  description        String
+  userEvents UserEvent[]
+  rooms Room[]
+  
+
+  @@map("events")
 }
 
-model resources {
-  id_resources    Int               @id @default(autoincrement())
-  name            String?           @db.VarChar
-  room_resourcers room_resourcers[]
-}
-
-model room {
-  id_room           Int               @id @default(autoincrement())
-  name              String            @db.VarChar
-  capacity          Int
-  photo             String?           @db.VarChar
-  creation_date     DateTime?         @db.Date
-  modification_date DateTime?         @db.Date
-  event             event[]
-  room_resourcers   room_resourcers[]
-}
-
-model room_resourcers {
-  id_rr          Int        @id @default(autoincrement())
-  id_roomrr      Int?
-  id_resourcesrr Int?
-  resources      resources? @relation(fields: [id_resourcesrr], references: [id_resources], onDelete: NoAction, onUpdate: NoAction)
-  room           room?      @relation(fields: [id_roomrr], references: [id_room], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model user {
-  id_user       Int          @id @default(autoincrement())
-  name          String       @db.VarChar
-  email         String       @unique @db.VarChar
-  phone         String?      @db.Char(11)
-  photo         String?      @db.VarChar
-  id_companyfk  Int?
-  creation_date DateTime?    @db.Date
-  edition_date  DateTime?    @db.Date
-  login         String       @db.VarChar
-  user_type     String?      @db.VarChar
-  password      String       @db.VarChar
-  company       company?     @relation(fields: [id_companyfk], references: [id_company], onDelete: NoAction, onUpdate: NoAction)
-  user_event    user_event[]
-}
-
-model user_event {
-  id_user_event Int      @id @default(autoincrement())
-  id_userue     Int?
-  id_eventue    Int?
-  confirmed     Boolean?
-  presence      Boolean?
-  event         event?   @relation(fields: [id_eventue], references: [id_event], onDelete: NoAction, onUpdate: NoAction)
-  user          user?    @relation(fields: [id_userue], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+model UserEvent{
+   id          String   @id @default(uuid())
+   userId        String
+   user      User @relation(fields: [userId], references: [id])
+   eventId        String
+   event      Event @relation(fields: [eventId], references: [id])
 }
