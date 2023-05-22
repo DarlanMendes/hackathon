@@ -13,7 +13,7 @@ interface Props {
         image: string
     }
 }
-export default function Login(props: Props) {
+export default function Login() {
     return (
         <div>
             <>

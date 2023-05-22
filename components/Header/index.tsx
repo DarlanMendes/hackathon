@@ -12,10 +12,10 @@ interface Props {
 }
 export default function Header(props: Props) {
     return (
-        <main className={`flex  justify-between items-center h-24 bg-${props.theme==='light'?'zinc-50':'zinc-700'} pr-10 pl-44`}>
+        <main className={`flex  justify-between items-center h-24 pr-10 pl-44 ${props.theme==='light'?'bg-zinc-50':'bg-zinc-700'}`}>
             <div className="relative flex items-center">
                 <input  className="h-12 bg-neutral-100 rounded-md w-[360px]"/>
-                <button  className="absolute h-8 w-[36] flex items-center right-2 gap-2 px-2 rounded-md bg-white">
+                <button  className="absolute h-8 w-[36] flex items-center right-2 gap-2 px-2 rounded-md bg-white" style={props.theme ==='light'?{backgroundColor:'#F5F5F5'}:{backgroundColor:"#555555",color:"white"}}>
                   <BsSearch/>  Buscar
                 </button>
             </div>

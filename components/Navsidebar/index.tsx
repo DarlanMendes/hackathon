@@ -16,7 +16,7 @@ export default function Navsidebar(props:Props){
         }
     }
     return(
-    <div className={`w-80 p-6 bg-${props.theme==='light'?'zinc-50':'zinc-700'} h-screen grid justify-center`} style={{gridTemplateRows:"140px 1fr 128px "}}>
+    <div className={`w-80 p-6 ${props.theme==='light'?'bg-zinc-50':'bg-zinc-700'} h-screen grid justify-center`} style={{gridTemplateRows:"140px 1fr 128px "}}>
         <div className="h-[90px] w-64 flex flex-col">
         <Image
             height={20}
@@ -25,7 +25,7 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
             </div>
         <div className="flex flex-col gap-8">
-        <Link href=""  className="text-base font-bold flex gap-2">
+        <Link href=""  className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
             <Image
             height={20}
             width={22}
@@ -33,7 +33,7 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
              Dashboard
             </Link>
-        <Link href="" className="text-base font-bold flex gap-2">
+        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
         <Image
             height={20}
             width={22}
@@ -41,13 +41,17 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
             Eventos
             </Link>
-        <Link href="" className="text-base font-bold flex gap-2">Usuários</Link>
-        <Link href="" className="text-base font-bold flex gap-2">Salas</Link>
+        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+            Usuários
+        </Link>
+        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+            Salas
+        </Link>
 
         </div>
         
         <div className="flex flex-col items-center  justify-center">
-            <span className="text-sm text-zinc-600 p-4">Ajuda e primeiros passos</span>
+            <span className={`text-sm text-zinc-600 p-4 ${props.theme==='light'?'text-zinc-700':'text-zinc-50'}`}>Ajuda e primeiros passos</span>
             <div className={`relative flex justify-between items-center ${props.theme==='light'?'bg-slate-300':'bg-yellow-300'} rounded-2xl px-5 py-1 w-full`}>
                 <div >Claro</div>
                 <div>Escuro</div>
