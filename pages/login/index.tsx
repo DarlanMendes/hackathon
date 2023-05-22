@@ -5,7 +5,7 @@ import { IconContext } from "react-icons"
 import { AiOutlineMail } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
 import { HiOutlineLockClosed } from "react-icons/hi"
-import axios from "axios"
+//import axios from "axios"
 interface Props {
     user: {
         name: string,
@@ -127,7 +127,7 @@ export async function getServerSideProps(ctx: any) {
     if (session) {
         const { user } = session
         
-        const userCreated = await axios.post(`http://${host}/api/users`, {name:user?.name,email:user?.email,photo:user?.image,phonenumber:'5585000000000'})
+        //const userCreated = await axios.post(`http://${host}/api/users`, {name:user?.name,email:user?.email,photo:user?.image,phonenumber:'5585000000000'})
         
         if (user) {
             return {

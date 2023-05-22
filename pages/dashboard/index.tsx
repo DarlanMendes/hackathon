@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import Navsidebar from '@/components/Navsidebar'
 import { getSession, signOut } from 'next-auth/react'
 import { useTheme } from '../../context/theme';
+
 interface Props {
     user: {
         name: string,
