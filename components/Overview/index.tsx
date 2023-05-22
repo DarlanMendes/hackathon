@@ -4,11 +4,9 @@ interface Props {
         qtd:string,
         porcentagem:string,
         periodo:string
-    }
-    
+    }  
 }
 export default function Overview(props:Props){
-    console.log(props.card);
     return (
         <div className="">
             <div className="h-48 w-96 bg-lime-100 flex place-content-center items-center rounded-2xl">
