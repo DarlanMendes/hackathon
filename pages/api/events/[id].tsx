@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
-import {Event} from "@prisma/client"
+import { PrismaClient, Event } from '@prisma/client'
+
 const prisma = new PrismaClient()
 // use `prisma` in your application to read and write data in your DB
 
