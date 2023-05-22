@@ -44,6 +44,7 @@ datasource db {
 
 model User {
   id          String   @id @default(uuid())
+  name        String 
   email       String   @unique
   phonenumber String   @default("")
   photo       String
