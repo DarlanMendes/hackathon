@@ -69,5 +69,7 @@ export default async function handler(
             return res.send({ erro: "Erro em deletar o usuário" })
         }
     }
-    res.send({ erro: "Erro ao acessar o servidor" })
+   
+   return res.send({ erro: "Erro ao acessar o servidor" })
 }
+//Criado por Rafael Formiga

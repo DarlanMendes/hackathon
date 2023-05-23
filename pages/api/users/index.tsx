@@ -51,5 +51,7 @@ export default async function handler(
         }
     }
     
+     
     return res.send ({erro: "Erro ao acessar o servidor"})
 }
+//desenvolvido por Rafael Formiga
