@@ -22,36 +22,54 @@ export default async function handler(
             const user = await prisma.user.findUnique({ where: { id: id } })
 
             if (user) {
-                res.send(user)
+                return res.send(user)
             }
             else {
-                res.send({ erro: "Usuário não encontrado" })
+                return res.send({ erro: "Usuário não encontrado" })
             }
         }
         else {
-            res.send({ erro: "Usuário não encontrado" })
+            return res.send({ erro: "Usuário não encontrado" })
         }
     }
     if (req.method === 'PATCH') {
-        const { id, name, email, photo, phonenumber, role } = req.body
+        const { id } = req.query
+        const { name, email, photo, phonenumber, role } = req.body
         if (id && name && email && photo && phonenumber && role) {
-            const userUpdated = await prisma.user.update({
-                where: {
-                    id
-                },
-                data: {
-                    id, name, email, photo, phonenumber, role
+            if (typeof id === "string") {
+                try { 
+                    const userUpdated = await prisma.user.update({
+                        where: {
+                            id
+                        },
+                        data: {
+                            name, email, photo, phonenumber, role
+                        }
+                    })
+                    res.send (userUpdated)
                 }
-            })
-            if(userUpdated){
-                res.send(userUpdated)
-            }else{
-                res.send({erro:"Erro ao atualizar usuário"})
-            }
-        }else{
-            res.status(401).send({erro:"Erro ao atualizar o usuário. Campo em branco"})
-        }
+                catch {
+                    return res.status(401).send({ erro: "Falha ao atualizar o usuário" })
+                }
 
+            } else {
+                return res.status(401).send({ erro: "Erro ao atualizar o usuário. Campo em branco" })
+            }
+
+        }
     }
 
+    if (req.method === 'DELETE') {
+        const { id } = req.query
+        try {
+            if (typeof id === "string") { const userDeleted = await prisma.user.delete({ where: { id } }) }
+            else { return res.send({ erro: "Erro em deletar o usuário" }) }
+        }
+        catch {
+            return res.send({ erro: "Erro em deletar o usuário" })
+        }
+    }
+   
+   return res.send({ erro: "Erro ao acessar o servidor" })
 }
+//Criado por Rafael Formiga

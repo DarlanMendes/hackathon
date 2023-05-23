@@ -11,9 +11,18 @@ type Erro = {
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<User | Erro>
+    res: NextApiResponse<User | Erro | Array<User>>
 ) {
 
+    if (req.method === 'GET'){
+        try{
+            const allUsers = await prisma.user.findMany()
+            return res.send(allUsers)
+        } catch{
+            return res.send({erro:"Erro ao carregar os usuários"})
+        }
+    }
+    
     if (req.method === 'POST') {
 
         const user: User = req.body
@@ -32,18 +41,17 @@ export default async function handler(
 
                     }
                 })
-                res.send(userCreated)
+                return res.send(userCreated)
             } catch {
-                res.send({ erro: "Erro ao criar usuário" })
+                return res.send({ erro: "Erro ao criar usuário" })
             }
 
-
-
-
-
         } else {
-            res.send({ erro: "Erro ao criar usuario" })
+            return res.send({ erro: "Erro ao criar usuario" })
         }
     }
-
+    
+     
+    return res.send ({erro: "Erro ao acessar o servidor"})
 }
+//desenvolvido por Rafael Formiga
