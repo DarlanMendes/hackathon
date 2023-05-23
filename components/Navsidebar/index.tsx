@@ -25,7 +25,7 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
             </div>
         <div className="flex flex-col gap-8">
-        <Link href=""  className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+        <Link href="/dashboard"  className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
             <Image
             height={20}
             width={22}
@@ -33,7 +33,7 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
              Dashboard
             </Link>
-        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+        <Link href="/dashboard" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
         <Image
             height={20}
             width={22}
@@ -41,10 +41,10 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
             Eventos
             </Link>
-        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+        <Link href="/users" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
             Usuários
         </Link>
-        <Link href="" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+        <Link href="/rooms" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
             Salas
         </Link>
 
