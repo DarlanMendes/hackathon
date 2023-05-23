@@ -43,7 +43,7 @@ export default async function handler(
                         {
                             where:
                                 { id: id }, data : {
-                                    name,capacity,resources, photo
+                                    name,capacity,resources,photo
                                 }
                         })
                     if (room) {
