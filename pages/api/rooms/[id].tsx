@@ -35,15 +35,15 @@ export default async function handler(
     }
     if (req.method === "PATCH") {
         const { id } = req.query
-        const { name, capacity, resources, photo, eventId } = req.body
-        if (name && capacity && resources && photo && eventId) {
+        const { name, capacity, resources, photo } = req.body
+        if (name && capacity && resources && photo) {
             if (typeof id === 'number') {
                 try {
                     const room = await prisma.room.update(
                         {
                             where:
                                 { id: id }, data : {
-                                    name,capacity,resources, eventId, photo
+                                    name,capacity,resources, photo
                                 }
                         })
                     if (room) {

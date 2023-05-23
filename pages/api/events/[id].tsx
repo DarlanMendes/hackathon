@@ -14,20 +14,66 @@ export default async  function handler(
   res: NextApiResponse<Data|Event>
 ) {
     
-   const {id} =  req.query
-    if(typeof id ===  'string'){
-        
-        const event = await prisma.event.findUnique({where:{id:id}})
-        console.log(event)
-        if(event){
-            res.send(event)
-        }
-        else{
-            res.send({erro:"Usuário não encontrado"})
-        }
-    }
-    else{
-        res.send({erro:"Usuário não encontrado"})
-    }
+    if (req.method === "GET") {
+        const { id } = req.query
+        if (typeof id === 'number') {
+            try {
+                const event = await prisma.event.findUnique({ where: { id: id } })
+                if (event) {
+                 return   res.send(event)
+                } else {
+                 return   res.send({ erro: "Nenhum evento corresponde a esse id" })
+                }
 
+            } catch {
+              return  res.send({ erro: "Erro ao consultar evento" })
+            }
+        }
+        else {
+          return  res.send({ erro: "Erro ao consultar evento" })
+        }
+    }
+    if (req.method === "PATCH") {
+        const { id } = req.query
+        const { nome, description, userEvents, rooms  } = req.body
+        if (nome && description && userEvents && rooms ) {
+            if (typeof id === 'number') {
+                try {
+                    const event = await prisma.event.update(
+                        {
+                            where:
+                                { id: id }, data : {
+                                    
+                                }
+                        })
+                    if (event) {
+                       return res.send(event)
+                    } else {
+                       return res.send({ erro: "Nenhuma sala corresponde a esse id" })
+                    }
+
+                } catch {
+                 return   res.send({ erro: "Erro ao consultar sala" })
+                }
+            }
+        }
+
+        else {
+           return res.send({ erro: "Erro ao atualizar sala" })
+        }
+    }
+    if(req.method === "DELETE"){
+        const {id} = req.query
+        if(typeof id === 'number'){
+            try{
+                const eventDeleted = await prisma.event.delete({where:{id}})
+              return  res.send(eventDeleted)
+            }catch{
+               return res.send({erro:"Erro ao deletar evento"})
+            }
+        }else{
+           return res.send({erro:"Erro ao deletar evento"})
+        }
+    }
+    res.send({erro:"Erro ao acessar o servidor"})
 }

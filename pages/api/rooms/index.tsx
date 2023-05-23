@@ -24,11 +24,11 @@ export default async  function handler(
     }
    }
    if(req.method ==="POST"){
-    const {name,capacity,resources,photo,eventId } = req.body
-    if(name&&capacity&&resources&&photo&&eventId ){
+    const {name,capacity,resources,photo } = req.body
+    if(name&&capacity&&resources&&photo ){
         try{
             const roomCreated = await prisma.room.create({data:{
-                name,capacity,resources,photo,eventId
+                name,capacity,resources,photo
             }})
             return res.send(roomCreated)
         }catch{
