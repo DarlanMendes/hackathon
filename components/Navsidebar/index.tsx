@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {useState} from "react"
 import Image from "next/image";
 
 
@@ -51,7 +50,7 @@ export default function Navsidebar(props:Props){
         </div>
         
         <div className="flex flex-col items-center  justify-center">
-            <span className={`text-sm text-zinc-600 p-4 ${props.theme==='light'?'text-zinc-700':'text-zinc-50'}`}>Ajuda e primeiros passos</span>
+            <span className={`text-sm  p-4 ${props.theme==='light'?'text-zinc-700':'text-white font-semibold'}`}>Ajuda e primeiros passos</span>
             <div className={`relative flex justify-between items-center ${props.theme==='light'?'bg-slate-300':'bg-yellow-300'} rounded-2xl px-5 py-1 w-full`}>
                 <div >Claro</div>
                 <div>Escuro</div>
