@@ -8,14 +8,7 @@
     } from "react-icons/ai";
     import { FiMapPin } from "react-icons/fi";
     import { BsTrash } from "react-icons/bs";
-/*<CardEvent
-imageSrc="components\card-eventos\img\dc_foto.jpg"
-altText="Pôr do sol nas montanhas"
-theme="Tema do Evento"
-data="22/05"
-horario="15:00"
-local="Local do Evento"
-/>*/
+/*<CardEvent*/
 
     interface CardEventProps {
     imageSrc: string;
