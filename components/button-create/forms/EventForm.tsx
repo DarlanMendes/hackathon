@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
-
 const EventForm = () => {
   const [room, setRoom] = useState('');
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    
+    console.log('hello word')
     // Obtenha a data atual
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'yyyy-MM-dd');

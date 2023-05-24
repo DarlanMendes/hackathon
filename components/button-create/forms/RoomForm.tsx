@@ -7,6 +7,8 @@ const RoomForm = () => {
   const [resources, setResources] = useState([]);
   const [photoUrl, setPhotoUrl] = useState('');
 
+  console.log('hello word')
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 

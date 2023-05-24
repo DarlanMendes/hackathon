@@ -11,6 +11,8 @@ function classNames(...classes: string[]) {
 const Dropdown: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState('');
 
+  console.log('hello word')
+
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
   };
