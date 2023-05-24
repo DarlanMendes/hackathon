@@ -41,17 +41,16 @@ datasource db {
 //   organizerId Int
 // }
 
-
 model User {
-  id          String   @id @default(uuid())
-  name        String 
-  email       String   @unique
-  phonenumber String   @default("")
+  id          String      @id @default(uuid())
+  name        String
+  email       String      @unique
+  phonenumber String      @default("")
   photo       String
-  role        String   @default("public")
-  userEvents UserEvent[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
+  role        String      @default("public")
+  userEvents  UserEvent[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
 
   @@map("users")
 }
@@ -61,10 +60,12 @@ model Room {
   name      String
   capacity  Int
   resources String[]
+  photo     String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-  eventId String
-  event     Event @relation(fields: [eventId], references: [id])
+  Events     Event[]
+  
+
   @@map("rooms")
 }
 
@@ -73,19 +74,19 @@ model Event {
   nome               String      @db.VarChar()
   dateHourStartsAt   DateTime
   dateHourFinishesAt DateTime
-  roomId             Int
   description        String
-  userEvents UserEvent[]
-  rooms Room[]
-  
+  userEvents         UserEvent[]
+  Room     Room   @relation(fields: [roomId], references: [id])
+  roomId   Int
+
 
   @@map("events")
 }
 
-model UserEvent{
-   id          String   @id @default(uuid())
-   userId        String
-   user      User @relation(fields: [userId], references: [id])
-   eventId        String
-   event      Event @relation(fields: [eventId], references: [id])
+model UserEvent {
+  id      String @id @default(uuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  eventId String
+  event   Event  @relation(fields: [eventId], references: [id])
 }
