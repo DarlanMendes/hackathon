@@ -47,6 +47,7 @@ model User {
   email       String      @unique
   phonenumber String      @default("")
   photo       String
+  password    String
   role        String      @default("public")
   userEvents  UserEvent[]
   createdAt   DateTime    @default(now())

@@ -1,8 +1,10 @@
 import Header from '@/components/Header'
 import Navsidebar from '@/components/Navsidebar'
 import { getSession, signOut } from 'next-auth/react'
-import { useTheme } from '../../context/theme';
-import Overview from '@/components/Overview';
+import { useTheme } from '../../context/theme'
+import Overview from '@/components/Overview'
+import axios from 'axios'
+
 interface Props {
     user: {
         name: string,
@@ -62,9 +64,13 @@ export default function Dashboard(props: Props) {
     )
 }
 export async function getServerSideProps(ctx: any) {
+    const { host } = ctx.req.headers;
     const session = await getSession(ctx)
+    
+
     if (session) {
         const { user } = session
+
         if (!user) {
             return {
                 redirect: {
@@ -73,6 +79,7 @@ export async function getServerSideProps(ctx: any) {
                 }
             }
         } else {
+           
             return {
                 props: {
                     user
