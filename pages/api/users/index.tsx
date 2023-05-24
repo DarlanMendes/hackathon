@@ -42,8 +42,8 @@ export default async function handler(
                     }
                 })
                 return res.send(userCreated)
-            } catch {
-                return res.send({ erro: "Erro ao criar usuário" })
+            } catch(e){
+                return res.send({ erro: `${e}Erro ao criar usuário` })
             }
 
         } else {
