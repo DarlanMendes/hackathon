@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 const RoomForm = () => {
   const [roomName, setRoomName] = useState('');
   const [capacity, setCapacity] = useState('');
-  const [resources, setResources] = useState([]);
+  const [resources, setResources] = useState(['']);
   const [photoUrl, setPhotoUrl] = useState('');
 
   console.log('hello word')

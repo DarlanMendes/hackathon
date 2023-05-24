@@ -26,6 +26,7 @@ export default function UsersDetailedEdit(props: Props) {
     const [role, setRole] = useState<string>(props.user.role)
 
     let user = { name, email, image }
+    console.log(user)
     return (
 
 
