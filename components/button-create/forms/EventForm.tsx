@@ -26,7 +26,7 @@ const EventForm = () => {
     // Exiba os dados do formData no console
     console.log('Dados do formulário:', formData);
 
-    // Limpe os campos do formulário após o envio
+    
     setRoom('');
     setTime('');
     setDate('');

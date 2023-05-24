@@ -26,7 +26,7 @@ const RoomForm = () => {
     // Exiba os dados do formData no console
     console.log('Dados do formulário:', formData);
 
-    // Limpe os campos do formulário após o envio
+   
     setRoomName('');
     setCapacity('');
     setResources([]);
