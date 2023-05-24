@@ -8,7 +8,7 @@
     } from "react-icons/ai";
     import { FiMapPin } from "react-icons/fi";
     import { BsTrash } from "react-icons/bs";
-/*<CardEvent*/
+/*<CardEvent fsidfsifdasijodf joasdoijfpçasdljkfnlaisjd */
 
     interface CardEventProps {
     imageSrc: string;
