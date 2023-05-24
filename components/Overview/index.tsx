@@ -10,7 +10,7 @@ interface Props {
 export default function Overview(props: Props) {
     return (
         <div className="">
-            <div className="h-48 w-[19vw] bg-lime-100 grid  grid-cols-2 place-content-center items-center rounded-2xl">
+            <div className="h-48 w-[19vw] bg-lime-100 grid  grid-cols-2place-content-center items-center rounded-2xl">
                 <div className="w-22 h-20 bg-white rounded-2xl flex place-content-center items-center mx-6">
                     <div className="w-20 h-20 flex items-center place-content-center bg-zinc-500 rounded-lg">
                         <img src={props.card?.img} 

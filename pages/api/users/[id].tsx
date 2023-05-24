@@ -9,10 +9,17 @@ type Data = {
     erro: string,
 
 }
-
+type UserReturned={
+    id:string,
+    name:string,
+    email:string,
+    phonenumber:string,
+    photo:string,
+    role:string
+}
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data | User>
+    res: NextApiResponse<Data | User |UserReturned >
 ) {
 
     if (req.method === 'GET') {
@@ -22,7 +29,9 @@ export default async function handler(
             const user = await prisma.user.findUnique({ where: { id: id } })
 
             if (user) {
-                return res.send(user)
+                const {id,name,email,phonenumber,photo,role}= user
+                const userFound = {id, name,email,phonenumber,photo,role}
+                return res.send(userFound)
             }
             else {
                 return res.send({ erro: "Usuário não encontrado" })

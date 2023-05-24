@@ -151,15 +151,15 @@ export async function getServerSideProps(ctx: any) {
   const { host } = ctx.req.headers;
   if (session) {
     const { user } = session;
-
+   
     const userCreated = await axios.post(`http://${host}/api/users`, {
       name: user?.name,
       email: user?.email,
       photo: user?.image,
       phonenumber: '5585000000000',
     });
-
-    if (user) {
+    console.log(userCreated)
+    if (userCreated) {
       return {
         redirect: {
           destination: '/dashboard',

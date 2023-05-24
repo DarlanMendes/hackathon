@@ -11,16 +11,16 @@ interface Props {
         email: string,
         image: string
     }
-    
-        listUsers:[User]
-    
+
+    listUsers: [User]
+
 }
 
 export default function Users(props: Props) {
 
     const { theme, toggleTheme } = useTheme();
 
-   
+    console.log(props.listUsers)
 
     return (
         <div className="flex">
@@ -33,11 +33,29 @@ export default function Users(props: Props) {
             <div className="w-full">
                 <Header theme={theme} user={props.user} />
                 <div className="px-24 pt-20">
-                    <div className="  w-full ">
-                        {props.listUsers.map((user_, index)=>(
-                                  <CardListUser key={index} user={user_}/>
+                    <div className={` w-full flex flex-col gap border rounded-xl ${theme === 'light' ? 'bg-zinc-100 text-zinc-900' : 'bg-zinc-700 text-zinc-100'}`}>
+                        <div className={`grid h-14 items-center`} style={{ gridTemplateColumns: '1fr 2fr 2fr 2fr 1fr' }}>
+                            <h1 className="text-center">
+                                Foto
+                            </h1>
+                            <h1>
+                                Nome
+                            </h1>
+                            <h1>
+                                Data de criação
+                            </h1>
+                            <h1>
+                                Email
+                            </h1>
+                            <h1>
+
+                            </h1>
+                        </div>
+                        <hr/>
+                        {props.listUsers?.map((user_, index) => (
+                          <CardListUser key={index} user={user_}/>
                         ))}
-                      
+
                     </div>
                 </div>
             </div>
@@ -49,7 +67,7 @@ export default function Users(props: Props) {
 export async function getServerSideProps(ctx: any) {
     const { host } = ctx.req.headers;
     const session = await getSession(ctx)
-    const listUsers= await axios.get(`http://${host}/api/users`)
+    const listUsers = await axios.get(`http://${host}/api/users`)
 
     if (session) {
         const { user } = session
@@ -66,7 +84,7 @@ export async function getServerSideProps(ctx: any) {
             return {
                 props: {
                     user,
-                    listUsers:listUsers.data
+                    listUsers: listUsers.data
                 }
             }
         }
