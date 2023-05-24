@@ -9,18 +9,29 @@ import Image from 'next/image';
 
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 interface Props {
-  user: {
-    name: string;
-    email: string;
-    image: string;
-  };
+  host: string;
 }
-export default function Signup() {
+export default function Signup(props: Props) {
+  const router = useRouter();
+  console.log(`http://${props.host}/api/users`);
+
+  const handleSignup = async () => {
+    const userCreated = await axios.post(`http://${props.host}/api/users`, {
+      name: 'Joao',
+      email: 'joaocarlo@gmail.com',
+      phonenumber: '85999999999',
+      photo: '/images/dots.png',
+    });
+    console.log(userCreated)
+    
+  };
+
   return (
-    <div className="max-w-screen-2xl mx-auto">
+    <div className="max-w-screen-1xl mx-auto">
       <div className="flex justify-center items-center">
-        <div className="flex flex-2 flex-col px-6 py-12 lg:px-8 z-50 bg-white">
+        <div className="flex flex-col px-6  lg:px-8 z-50 bg-white">
           <div className="flex flex-col sm:mx-auto sm:w-full sm:max-w-sm">
             <Image
               width={200}
@@ -29,13 +40,13 @@ export default function Signup() {
               src="/images/logo-dark.png.png"
               alt="logo"
             />
-            <h2 className="mt-10  text-5xl font-semibold leading-9 tracking-tight text-gray-900">
+            <h2 className="mt-5  text-4xl font-semibold leading-4 text-center tracking-tight text-gray-900">
               Cadastre-se
             </h2>
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-1" action="#" method="POST">
               <div>
                 <p className="p-10px font-semibold">Entre com sua conta:</p>
               </div>
@@ -172,27 +183,21 @@ export default function Signup() {
 
               <div>
                 <button
+                  
                   type="submit"
                   className="flex mb-5 rounded-xl w-full justify-center  bg-blue-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Entrar
+                  Cadastrar
                 </button>
               </div>
             </form>
-            <div className="text-center text-color-gray-title">
-              Não tem uma conta?
-              <Link
-                href="/signup"
-                className=" hover:text-gray-400/20 font-bold ml-1 "
-              >
-                Cadastre-se
-              </Link>
-            </div>
+            <button onClick={handleSignup}>teste</button>
+
           </div>
         </div>
         <Image
-          width={800}
-          height={1000}
+          width={600}
+          height={700}
           className=""
           src="/images/imagelogin.png"
           alt="logo"
@@ -204,15 +209,9 @@ export default function Signup() {
 export async function getServerSideProps(ctx: any) {
   const session = await getSession(ctx);
   const { host } = ctx.req.headers;
+
   if (session) {
     const { user } = session;
-
-    const userCreated = await axios.post(`http://${host}/api/users`, {
-      name: user?.name,
-      email: user?.email,
-      photo: user?.image,
-      phonenumber: '5585000000000',
-    });
 
     if (user) {
       return {
@@ -224,7 +223,7 @@ export async function getServerSideProps(ctx: any) {
     }
   } else {
     return {
-      props: {},
+      props: { host },
     };
   }
 }
