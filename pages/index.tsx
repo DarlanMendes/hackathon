@@ -4,7 +4,7 @@ import SignUp from './signup'
 import Header from '@/components/Header'
 import User from './user'
 import Overview from '@/components/Overview'
-import HomePage from './homepage'
+import HomePage from '@/components/Homepage'
 
 const inter = Inter({ subsets: ['latin'] })
 
