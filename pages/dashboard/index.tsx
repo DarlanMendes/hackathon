@@ -27,7 +27,7 @@ export default function Dashboard(props: Props) {
 
             <main className={`${theme === 'light' ? 'bg-zinc-100' : 'bg-zinc-400'}`} >
                 <Header theme={theme} user={props.user} />
-                <div className=" pt-11 pl-64 flex flex-col justify-center ">
+                <div className=" pt-11  flex flex-col justify-center ">
                     <h1 className={`text-4xl font-bold ${theme === 'light' ? 'text-zinc-800' : 'text-zinc-50'}`}>
                         Dashboard
                     </h1>
