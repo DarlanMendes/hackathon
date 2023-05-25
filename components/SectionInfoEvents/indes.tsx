@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function SectionInfoEvents() {
   return (
-    <section className="max-w-screen-2xl mx-auto flex flex-col items-center relative m-auto">
+    <section className="max-w-screen-xl mx-auto flex flex-col items-center relative m-auto">
       <Image
         src="/images/Rectangle11.png"
         className="absolute right-16 -top-20"

@@ -40,7 +40,7 @@ export default function Navsidebar(props:Props){
              alt="dashboard"/>
             Eventos
             </Link>
-        <Link href="/users" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
+        <Link href="/user" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>
             Usuários
         </Link>
         <Link href="/rooms" className="text-base font-bold flex gap-2" style={props.theme ==='light'?{color:'#333333'}:{color:"#F5F5F5"}}>

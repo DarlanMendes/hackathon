@@ -13,19 +13,18 @@ import { useRouter } from 'next/router';
 interface Props {
   host: string;
 }
-export default function Signup(props: Props) {
+export default function Signup({host}: Props) {
   const router = useRouter();
-  console.log(`http://${props.host}/api/users`);
+  console.log(`http://${host}/api/users`);
 
   const handleSignup = async () => {
-    const userCreated = await axios.post(`http://${props.host}/api/users`, {
+    const userCreated = await axios.post(`http://${host}/api/users`, {
       name: 'Joao',
       email: 'joaocarlo@gmail.com',
       phonenumber: '85999999999',
       photo: '/images/dots.png',
     });
-    console.log(userCreated)
-    
+    console.log(userCreated);
   };
 
   return (
@@ -183,7 +182,7 @@ export default function Signup(props: Props) {
 
               <div>
                 <button
-                  
+                  onClick={handleSignup}
                   type="submit"
                   className="flex mb-5 rounded-xl w-full justify-center  bg-blue-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
@@ -191,13 +190,11 @@ export default function Signup(props: Props) {
                 </button>
               </div>
             </form>
-            <button onClick={handleSignup}>teste</button>
-
           </div>
         </div>
         <Image
-          width={600}
-          height={700}
+          width={800}
+          height={1000}
           className=""
           src="/images/imagelogin.png"
           alt="logo"

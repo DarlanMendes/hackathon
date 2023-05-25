@@ -22,7 +22,7 @@ export default function HeaderHomePage() {
  
     "
     >
-      <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center">
         <Image
           className=""
           height={110}
