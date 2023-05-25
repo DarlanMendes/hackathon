@@ -15,10 +15,11 @@ interface Props {
   host: string;
 }
 export default function SignUp(props: Props) {
-  const[email,setEmail]=useState<String>()
-  const[confirmEmail,setConfirmEmail]=useState<String>()
-  const[password,setPassword]=useState<String>()
-  const[confirmPassword,setConfirmPassword]=useState<String>()
+  const [name, setName] = useState<string>()
+  const[email,setEmail]=useState<string>()
+  const[confirmEmail,setConfirmEmail]=useState<string>()
+  const[password,setPassword]=useState<string>()
+  const[confirmPassword,setConfirmPassword]=useState<string>()
   const { data: session, status } = useSession()
   const router = useRouter()
   useEffect(()=>{
@@ -42,22 +43,32 @@ export default function SignUp(props: Props) {
   }
 
 
-  const handleSignUp = async () => {
-    event?.preventDefault()
+  const handleSignUp = async (e:any) => {
+    e?.preventDefault()
     if(email!==confirmEmail||password!==confirmPassword){
       return alert("Confira o preenchmento dos campos email e senha diferem ")
     }
     if(email&& password){
-      const userCreated = await axios.post(`http://${props.host}/api/users`, {
-      name: email,
-      email,
-      phonenumber: '85999999999',
-      password,
-      photo: '/images/dots.png',
-    });
-    console.log(userCreated)
-    if(userCreated){
-      router.push("/dashboard")
+      
+      if(password.includes("@"||"#"||"?"||"."||"$"||"%"||"&"||"*")&&password.length>=8){
+        console.log("entrou")
+        const userCreated = await axios.post(`http://${props.host}/api/users`, {
+          name:name,
+          email:email,
+          phonenumber: '',
+          password:password,
+          photo: '/images/avatarUser.png',
+        });
+        console.log(userCreated)
+        if(userCreated){
+          alert("usuário criado com sucesso")
+          router.push("/dashboard")
+      }else{
+        alert("Erro ao cadastrar usuário")
+      }
+     
+    }else{
+      alert("Preencha a senha com no mínimo 8 caracteres, uma letra maiúscula e um caracter especial !@#$%&* ")
     }
     }else{
       alert("Preencha todos os campos")
@@ -105,6 +116,27 @@ export default function SignUp(props: Props) {
                 <p className="p-10px font-semibold">
                   Ou continue com o seu endereço de e-mail:
                 </p>
+              </div>
+              <div className="relative ">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-gray-900 absolute top-3
+                    left-3"
+                >
+                
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="nome"
+                    name="nome"
+                    type="text"
+                    placeholder="Nome"
+                    required
+                    minLength={16}
+                    className="block py-3 w-full rounded-md border-0 pl-8 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-600  font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
+                    onChange={(e)=>{setName(e.target.value)}}
+                  />
+                </div>
               </div>
 
               <div className="relative ">
@@ -187,10 +219,15 @@ export default function SignUp(props: Props) {
                     type="password"
                     autoComplete="current-password"
                     placeholder="Senha"
-                    pattern="^(.+)$"
+                    
                     required
-                    title="Por favor, preencha uma senha válida"
-                    className="block w-full rounded-md border-0 py-3 bg-zinc-100 shadow-sm ring-1 ring-inset pl-8  ring-grey-600 placeholder:text-grey-600 font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm  text-zinc-200 sm:leading-6 "
+                    title="A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial (!@#$%&*()-+=^.)"
+                    className="block w-full 
+                    rounded-md border-0 py-3 
+                    bg-transparent shadow-sm text-gray-900 ring-1 ring-inset pl-8  
+                    ring-grey-600 placeholder:text-gray-900 font-medium 
+                    focus:ring-2 focus:ring-inset focus:ring-indigo-600
+                     sm:text-sm  sm:leading-6 "
                     onChange={(e)=>{setPassword(e.target.value)}}
                   />
                 </div>
@@ -221,7 +258,7 @@ export default function SignUp(props: Props) {
                     pattern="^(.+)$"
                     required
                     title="Por favor, preencha uma senha válida"
-                    className="block w-full rounded-md border-0 py-3 bg-zinc-100 shadow-sm ring-1 ring-inset pl-8  ring-grey-600 placeholder:text-grey-600 font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm  text-zinc-200 sm:leading-6 "
+                    className="block w-full rounded-md border-0 py-3 bg-transparent shadow-sm ring-1 ring-inset pl-8  ring-grey-600 placeholder:text-gray-900 font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm  text-zinc-200 sm:leading-6 "
                   onChange={(e)=>{setConfirmPassword(e.target.value)}}
                   />
                 </div>
@@ -231,7 +268,7 @@ export default function SignUp(props: Props) {
               <button
                   type="submit"
                   className="flex mb-5 rounded-xl w-full justify-center mt-5  bg-blue-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={()=>handleSignUp}
+                onClick={(e)=>handleSignUp(e)}
                 >
                   Cadastrar
                 </button>

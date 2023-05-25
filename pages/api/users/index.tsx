@@ -31,8 +31,8 @@ export default async function handler(
 
         const { name, email, phonenumber, photo, password} = user
         let passwordHashed
-        if (name && email && phonenumber && photo) {
-            bcrypt.hash(password?password:email, 10, async (err:any, hash:string) => {
+        if (name && email && password) {
+            bcrypt.hash(password, 10, async (err:any, hash:string) => {
                 if (err) {
                   return res.send({erro:"Erro ao validar senha"})
                 } else {
